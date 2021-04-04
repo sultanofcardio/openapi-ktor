@@ -1,0 +1,88 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.31'
+    id 'org.jetbrains.dokka' version '0.10.1'
+    id 'maven-publish'
+}
+
+String ktorVersion = "1.5.3"
+
+group = 'com.sultanofcardio'
+version = "$ktorVersion-0.0.1"
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://kotlin.bintray.com/ktor" }
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+
+task dokkaJavadoc(type: DokkaTask) {
+    outputFormat = 'javadoc'
+    outputDirectory = javadoc.destinationDir
+    inputs.dir 'src/main/kotlin'
+}
+
+task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+publishing {
+    repositories {
+        maven {
+            name "sultanofcardio"
+            credentials {
+                username System.getenv("username")
+                password System.getenv("password")
+            }
+            url "https://repo.sultanofcardio.com/artifactory/sultanofcardio"
+        }
+    }
+
+    publications {
+        binary(MavenPublication) {
+            artifactId "${project.name}"
+            version version
+            from components.java
+            artifact javadocJar
+            artifact sourcesJar
+        }
+
+        snapshot(MavenPublication) {
+            artifactId "${project.name}"
+            version "${version}-SNAPSHOT"
+            from components.java
+            artifact javadocJar
+            artifact sourcesJar
+        }
+    }
+}
+
+dependencies {
+    api "io.ktor:ktor-server-core:$ktorVersion"
+    api "io.ktor:ktor-auth:$ktorVersion"
+    api 'org.json:json:20201115'
+    api 'org.yaml:snakeyaml:1.21'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testImplementation "io.ktor:ktor-server-tests:$ktorVersion"
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
