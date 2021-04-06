@@ -67,6 +67,7 @@ publishing {
 dependencies {
     api "io.ktor:ktor-server-core:$ktorVersion"
     api "io.ktor:ktor-auth:$ktorVersion"
+    api "io.ktor:ktor-auth-jwt:$ktorVersion"
     api 'org.json:json:20201115'
     api 'org.yaml:snakeyaml:1.21'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'

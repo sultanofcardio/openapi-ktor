@@ -4,7 +4,6 @@ import com.sultanofcardio.Model
 import com.sultanofcardio.json
 import org.json.JSONObject
 
-// TODO: Add jwt auth
 open class SecurityScheme(
     var name: String,
     var type: String,
