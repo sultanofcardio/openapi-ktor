@@ -19,7 +19,9 @@ class BasicAuth(
  * to [authenticate]
  */
 fun OpenAPIDoc.basicAuth(name: String, handler: BasicAuthenticationProvider.Configuration.() -> Unit): BasicAuth {
-    val basicAuth = BasicAuth(name)
+    var basicAuth = getSecurityScheme<BasicAuth>(name)
+    if(basicAuth != null) return basicAuth
+    basicAuth = BasicAuth(name)
     auth.configure {
         basic(name, handler)
     }

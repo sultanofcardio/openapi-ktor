@@ -35,7 +35,9 @@ fun OpenAPIDoc.apiKey(
     `in`: ApiKeyLocation,
     handler: ApiKeyAuthenticationProvider.Configuration.() -> Unit = {}
 ): ApiKey {
-    val apiKey = ApiKey(name, `in`)
+    var apiKey = getSecurityScheme<ApiKey>(name)
+    if(apiKey != null) return apiKey
+    apiKey = ApiKey(name, `in`)
     auth.configure {
         apiKeyAuth(name, `in`, handler)
     }

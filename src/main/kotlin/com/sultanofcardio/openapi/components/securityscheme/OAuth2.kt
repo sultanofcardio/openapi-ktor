@@ -101,7 +101,9 @@ class OAuthFlows : Model {
  * to [authenticate]
  */
 fun OpenAPIDoc.oauth2(name: String, handler: OAuthAuthenticationProvider.Configuration.(OAuthFlows) -> Unit): OAuth2 {
-    val oauth2 = OAuth2(name)
+    var oauth2 = getSecurityScheme<OAuth2>(name)
+    if(oauth2 != null) return oauth2
+    oauth2 = OAuth2(name)
     auth.configure {
         oauth(name) {
             handler(this, oauth2.flows)

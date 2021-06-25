@@ -8,7 +8,7 @@ import org.json.JSONObject
 
 class JWTAuth(
     name: String
-): SecurityScheme(name, "http") {
+) : SecurityScheme(name, "http") {
     override fun json(): JSONObject = super.json().invoke {
         "scheme" to "bearer"
     }
@@ -19,7 +19,9 @@ class JWTAuth(
  * to [authenticate]
  */
 fun OpenAPIDoc.jwtAuth(name: String, handler: JWTAuthenticationProvider.Configuration.() -> Unit): JWTAuth {
-    val jwtAuth = JWTAuth(name)
+    var jwtAuth = getSecurityScheme<JWTAuth>(name)
+    if(jwtAuth != null) return jwtAuth
+    jwtAuth = JWTAuth(name)
     auth.configure {
         jwt(name, handler)
     }
