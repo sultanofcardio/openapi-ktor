@@ -17,7 +17,7 @@ operator fun JSONObject.set(key: String, value: Any): JSONObject {
  * Convenience function using JSONFactory as a DSL to add properties to an
  * existing [JSONObject]
  */
-fun JSONObject.extend(lambda: JSONFactory.() -> Unit): JSONObject {
+operator fun JSONObject.invoke(lambda: JSONFactory.() -> Unit): JSONObject {
     val factory = JSONFactory(this)
     lambda(factory)
     return this

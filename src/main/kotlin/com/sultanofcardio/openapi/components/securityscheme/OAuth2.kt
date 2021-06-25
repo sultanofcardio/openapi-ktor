@@ -1,7 +1,7 @@
 package com.sultanofcardio.openapi.components.securityscheme
 
 import com.sultanofcardio.Model
-import com.sultanofcardio.extend
+import com.sultanofcardio.invoke
 import com.sultanofcardio.openapi.OpenAPIDoc
 import com.sultanofcardio.openapi.models.Scopes
 import io.ktor.auth.*
@@ -13,7 +13,7 @@ class OAuth2(
 
     val flows: OAuthFlows = OAuthFlows()
 
-    override fun json(): JSONObject = super.json().extend {
+    override fun json(): JSONObject = super.json {
         "flows" to flows.json()
     }
 }

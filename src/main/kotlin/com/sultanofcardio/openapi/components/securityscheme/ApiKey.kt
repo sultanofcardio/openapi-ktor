@@ -1,6 +1,6 @@
 package com.sultanofcardio.openapi.components.securityscheme
 
-import com.sultanofcardio.extend
+import com.sultanofcardio.invoke
 import com.sultanofcardio.openapi.OpenAPIDoc
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -20,7 +20,7 @@ class ApiKey(
     name: String,
     val `in`: ApiKeyLocation
 ) : SecurityScheme(name, "apiKey") {
-    override fun json(): JSONObject = super.json().extend {
+    override fun json(): JSONObject = super.json {
         "name" to name
         "in" to `in`.name
     }

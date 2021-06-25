@@ -1,6 +1,6 @@
 package com.sultanofcardio.openapi.components.securityscheme
 
-import com.sultanofcardio.extend
+import com.sultanofcardio.invoke
 import com.sultanofcardio.openapi.OpenAPIDoc
 import io.ktor.auth.*
 import org.json.JSONObject
@@ -9,7 +9,7 @@ class BasicAuth(
     name: String
 ) : SecurityScheme(name, "http") {
 
-    override fun json(): JSONObject = super.json().extend {
+    override fun json(): JSONObject = super.json {
         "scheme" to "basic"
     }
 }
