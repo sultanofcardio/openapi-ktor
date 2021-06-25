@@ -64,6 +64,9 @@ open class RouteHandler internal constructor(
             } else {
                 docsEndpoint()
             }
+
+            // TODO: Find a way to log the connector, host, and port (e.g. http://0.0.0.0:8080/docs/)
+            application.log.info("Swagger UI served at /docs/")
         }
     }
 
