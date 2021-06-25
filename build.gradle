@@ -9,7 +9,7 @@ plugins {
 String ktorVersion = "1.5.3"
 
 group = 'com.sultanofcardio'
-version = "$ktorVersion-0.0.1"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
