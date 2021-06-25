@@ -95,6 +95,10 @@ open class RouteHandler internal constructor(
         }
     }
 
+    fun tags(vararg tags: Tag) {
+        this.tags.addAll(tags)
+    }
+
     /**
      * Add authenticated routes
      */
