@@ -2,8 +2,11 @@
 
 package com.sultanofcardio.openapi.models
 
-import com.sultanofcardio.openapi.*
+import com.sultanofcardio.openapi.RoutingLambda
+import com.sultanofcardio.openapi.SwaggerDSL
+import com.sultanofcardio.openapi.SwaggerLambda
 import com.sultanofcardio.openapi.components.securityscheme.SecurityScheme
+import com.sultanofcardio.openapi.openApiDoc
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.http.content.*
@@ -25,11 +28,26 @@ open class RouteHandler internal constructor(
     val paths: MutableMap<String, MutableSet<PathOp>> = mutableMapOf()
     val authenticatedRouters = mutableSetOf<AuthenticatedRouteHandler>()
     var nestedRouters = mutableSetOf<RouteHandler>()
-    open val consolidatedPaths: MutableMap<String, MutableSet<PathOp>>
-        get() = paths.apply {
-            nestedRouters.forEach { putAll(it.consolidatedPaths) }
-            authenticatedRouters.forEach { putAll(it.consolidatedPaths) }
+    open val consolidatedPaths: Map<String, MutableSet<PathOp>>
+        get() {
+            val nested = nestedRouters.map { it.consolidatedPaths }.combinePaths()
+            val authenticated = authenticatedRouters.map { it.consolidatedPaths }.combinePaths()
+            return listOf(paths, nested, authenticated).combinePaths()
         }
+
+    fun List<Map<String, MutableSet<PathOp>>>.combinePaths(): Map<String, MutableSet<PathOp>> {
+        return map { it.toMutableMap() }.reduceOrNull { acc, map ->
+            map.forEach { (path, ops) ->
+                if (path in acc) {
+                    acc[path]!!.addAll(ops)
+                } else {
+                    acc[path] = mutableSetOf(*ops.toTypedArray())
+                }
+            }
+            acc
+        } ?: mutableMapOf()
+
+    }
 
     /**
      * Serve up a Swagger UI page with these docs
