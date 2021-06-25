@@ -7,6 +7,7 @@ import com.sultanofcardio.Model
 import com.sultanofcardio.json
 import com.sultanofcardio.openapi.openApiSchema
 import io.ktor.http.*
+import org.intellij.lang.annotations.Language
 import org.json.JSONObject
 
 open class Content(
@@ -21,6 +22,21 @@ open class Content(
 }
 
 class PlainTextContent(value: String) : Content(ContentType.Text.Plain, value)
+
+class HtmlContent(
+    @Language("html")
+    value: String
+) : Content(ContentType.Text.Html, value)
+
+class TextXmlContent(
+    @Language("xml")
+    value: String
+) : Content(ContentType.Text.Xml, value)
+
+class ApplicationXmlContent(
+    @Language("xml")
+    value: String
+) : Content(ContentType.Application.Xml, value)
 
 class JsonContent(value: JSONObject) : Content(ContentType.Application.Json, value) {
     constructor(value: Model): this(value.json())
