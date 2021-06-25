@@ -9,7 +9,7 @@ class BasicAuth(
     name: String
 ) : SecurityScheme(name, "http") {
 
-    override fun json(): JSONObject = super.json {
+    override fun json(): JSONObject = super.json().invoke {
         "scheme" to "basic"
     }
 }

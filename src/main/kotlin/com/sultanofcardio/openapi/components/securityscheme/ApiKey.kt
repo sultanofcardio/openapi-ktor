@@ -20,7 +20,7 @@ class ApiKey(
     name: String,
     val `in`: ApiKeyLocation
 ) : SecurityScheme(name, "apiKey") {
-    override fun json(): JSONObject = super.json {
+    override fun json(): JSONObject = super.json().invoke {
         "name" to name
         "in" to `in`.name
     }

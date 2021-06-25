@@ -9,7 +9,7 @@ import org.json.JSONObject
 class JWTAuth(
     name: String
 ): SecurityScheme(name, "http") {
-    override fun json(): JSONObject = super.json {
+    override fun json(): JSONObject = super.json().invoke {
         "scheme" to "bearer"
     }
 }

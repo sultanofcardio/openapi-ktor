@@ -13,7 +13,7 @@ class OAuth2(
 
     val flows: OAuthFlows = OAuthFlows()
 
-    override fun json(): JSONObject = super.json {
+    override fun json(): JSONObject = super.json().invoke {
         "flows" to flows.json()
     }
 }
