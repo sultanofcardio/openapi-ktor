@@ -3,8 +3,6 @@ package com.sultanofcardio.openapi
 import com.sultanofcardio.Model
 import com.sultanofcardio.json
 import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.http.*
 import io.ktor.routing.*
 import org.json.JSONObject
 import java.math.BigDecimal
@@ -33,7 +31,7 @@ val Any.openApiSchema: JSONObject
                 "example" to this@openApiSchema
             }
             "object" -> {
-                when(this) {
+                when (this) {
                     is JSONObject -> this.openApiSchema
                     is Model -> this.json().openApiSchema
                     else -> json {} // TODO: Come up with a better default
@@ -130,14 +128,21 @@ val JSONObject.openApiSchema: JSONObject
         }
     }
 
-internal lateinit var openApiDoc: OpenAPIDoc
+object Docs : HashMap<Application, OpenAPIDoc>() {
+    fun getOrCreate(application: Application): OpenAPIDoc {
+        var doc = this[application]
+
+        if (doc == null) {
+            doc = OpenAPIDoc(application)
+            this[application] = doc
+        }
+
+        return doc
+    }
+}
 
 @SwaggerDSL
 fun Route.openapi(handler: OpenAPIDoc.() -> Unit) {
-
-    if(!::openApiDoc.isInitialized) {
-        openApiDoc = OpenAPIDoc(application)
-    }
-
-    handler(openApiDoc)
+    Docs.getOrCreate(application)
+        .handler()
 }

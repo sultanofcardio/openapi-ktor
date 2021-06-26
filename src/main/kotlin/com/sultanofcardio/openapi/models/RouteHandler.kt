@@ -2,11 +2,11 @@
 
 package com.sultanofcardio.openapi.models
 
+import com.sultanofcardio.openapi.Docs
 import com.sultanofcardio.openapi.RoutingLambda
 import com.sultanofcardio.openapi.SwaggerDSL
 import com.sultanofcardio.openapi.SwaggerLambda
 import com.sultanofcardio.openapi.components.securityscheme.SecurityScheme
-import com.sultanofcardio.openapi.openApiDoc
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.http.content.*
@@ -58,7 +58,7 @@ open class RouteHandler internal constructor(
         application.routing {
             fun Route.docsEndpoint() {
                 get("$pathWithoutTrailingSlash/openapi.json") {
-                    call.respond(openApiDoc.toString())
+                    call.respond(Docs.getOrCreate(application).toString())
                 }
 
                 // TODO: Add a YAML endpoint
