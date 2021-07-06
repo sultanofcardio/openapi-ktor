@@ -2,6 +2,8 @@
 
 Generate a swagger document from your ktor application
 
+[Sample project](https://github.com/sultanofcardio/openapi-ktor-sample)
+
 ---
 
 * [Installation](#installation)
