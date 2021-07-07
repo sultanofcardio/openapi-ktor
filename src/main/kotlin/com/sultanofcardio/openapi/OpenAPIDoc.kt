@@ -24,9 +24,9 @@ class OpenAPIDoc(
 ) : Model, RouteHandler(application, documentedBasePath = basePath) {
 
     var info: Info? = null
-    internal var externalDocs: ExternalDocs? = null
-    internal val components: Components = Components()
-    internal val servers = mutableListOf<Server>()
+    var externalDocs: ExternalDocs? = null
+    val components: Components = Components()
+    val servers = mutableListOf<Server>()
     val auth = application.let {
         it.featureOrNull(Authentication) ?: it.install(Authentication) {}
     }
