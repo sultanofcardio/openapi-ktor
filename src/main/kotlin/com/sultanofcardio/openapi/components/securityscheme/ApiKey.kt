@@ -2,6 +2,7 @@ package com.sultanofcardio.openapi.components.securityscheme
 
 import com.sultanofcardio.invoke
 import com.sultanofcardio.openapi.OpenAPIDoc
+import com.sultanofcardio.openapi.models.RouteHandler
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.http.auth.*
@@ -9,6 +10,9 @@ import io.ktor.request.*
 import io.ktor.response.*
 import org.json.JSONObject
 
+/**
+ * The location of the API key. Valid values are "query", "header" or "cookie".
+ */
 @Suppress("EnumEntryName")
 enum class ApiKeyLocation {
     query,
@@ -16,6 +20,11 @@ enum class ApiKeyLocation {
     cookie
 }
 
+/**
+ * The OpenAPI apiKey security scheme
+ *
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#security-scheme-object">Security Scheme Object</a>
+ */
 class ApiKey(
     name: String,
     val `in`: ApiKeyLocation
@@ -28,7 +37,7 @@ class ApiKey(
 
 /**
  * Create a basic auth security scheme component that can be used as a configuration
- * to [authenticate]
+ * to [RouteHandler.authenticate]
  */
 fun OpenAPIDoc.apiKey(
     name: String,
