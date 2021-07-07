@@ -135,6 +135,8 @@ object Docs : HashMap<Application, OpenAPIDoc>() {
         if (doc == null) {
             doc = OpenAPIDoc(application)
             this[application] = doc
+        } else {
+            application.log.trace("", Exception("OpenAPIDoc for application $application is being reused"))
         }
 
         return doc
