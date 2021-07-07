@@ -13,16 +13,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 /**
- * TODO: Change this to actual description docs
- * This is a hacky attempts to serve swagger docs from Ktor. I threw this together in a few days because
- * there's no official support from Ktor, the team isn't really interested in it and I'm not looking to
- * adopt a third-party unofficial method.
- *
- * This was the fastest and most flexible way IMO to get this done. The goal was to integrate the docs
- * with the routing declaration and share the models being used in the actual code. That way, we don't
- * have to maintain two separate things
+ * An OpenAPI document object.
  *
  * @author sultanofcardio
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#oasObject">OpenAPI Object</a>
  */
 class OpenAPIDoc(
     application: Application,
