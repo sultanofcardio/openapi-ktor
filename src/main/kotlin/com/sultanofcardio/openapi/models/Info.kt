@@ -5,10 +5,10 @@ import com.sultanofcardio.json
 import org.json.JSONObject
 
 class Info : Model {
-    var title: String? = null
+    lateinit var title: String
+    lateinit var version: String
     var description: String? = null
     var termsOfService: String? = null
-    var version: String? = null
     private var contact: Contact? = null
     private var license: License? = null
 
@@ -24,12 +24,12 @@ class Info : Model {
     }
 
     override fun json(): JSONObject = json {
-        version?.let {
-            "version" to it
-        }
-        title?.let {
-            "title" to it
-        }
+        check(this@Info::title.isInitialized) { "Please set a value for the title property" }
+        check(this@Info::version.isInitialized) { "Please set a value for the version property" }
+
+        "version" to version
+        "title" to title
+
         description?.let {
             "description" to it
         }
@@ -45,7 +45,7 @@ class Info : Model {
     }
 }
 
-class Contact internal constructor(): Model {
+class Contact : Model {
     var email: String? = null
 
     override fun json(): JSONObject = json {
@@ -55,15 +55,14 @@ class Contact internal constructor(): Model {
     }
 }
 
-class License internal constructor(): Model {
-    var name: String? = null
+class License : Model {
+    lateinit var name: String
     var url: String? = null
 
     override fun json(): JSONObject = json {
-        name?.let {
-            "name" to it
-        }
+        check(this@License::name.isInitialized) { "Please set a value for the name property" }
 
+        "name" to name
         url?.let {
             "url" to it
         }

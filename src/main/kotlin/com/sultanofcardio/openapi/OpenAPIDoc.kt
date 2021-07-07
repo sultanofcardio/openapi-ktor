@@ -23,7 +23,7 @@ class OpenAPIDoc(
     basePath: String = ""
 ) : Model, RouteHandler(application, documentedBasePath = basePath) {
 
-    var info: Info? = null
+    val info: Info = Info()
     var externalDocs: ExternalDocs? = null
     val components: Components = Components()
     val servers = mutableListOf<Server>()
@@ -48,17 +48,12 @@ class OpenAPIDoc(
     }
 
     fun info(handler: Info.() -> Unit) {
-        Info().let {
-            handler(it)
-            info = it
-        }
+        info.handler()
     }
 
     override fun json(): JSONObject = json {
         "openapi" to openapi
-        info?.let {
-            "info" to it.json()
-        }
+        "info" to info.json()
         "servers" to JSONArray(servers.distinctBy { it.url }.map { it.json() })
         "tags" to JSONArray(tags.distinctBy { it.name }.map { it.json() })
         externalDocs?.let {
