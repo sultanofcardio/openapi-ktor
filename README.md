@@ -3,9 +3,10 @@
 Generate a swagger document from your ktor application. See the 
 [sample project](https://github.com/sultanofcardio/openapi-ktor-sample)
 
+[![OpenAPI](https://img.shields.io/badge/openapi-3.0.3-87bf40.svg?logo=swagger)](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md)
 [![Kotlin](https://img.shields.io/badge/kotlin-1.5.20-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![Ktor](https://img.shields.io/badge/ktor-1.5.3-orange.svg)](https://ktor.io/)
-[![Gradle](https://img.shields.io/badge/gradle-6.7-green.svg?logo=gradle)](https://docs.gradle.org/6.7/userguide/userguide.html)
+[![Gradle](https://img.shields.io/badge/gradle-6.7-darkgreen.svg?logo=gradle)](https://docs.gradle.org/6.7/userguide/userguide.html)
 [![Java](https://img.shields.io/badge/java-1.8-red.svg?logo=java)](https://java.com/)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
