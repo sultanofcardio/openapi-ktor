@@ -1,8 +1,13 @@
 # OpenAPI Ktor
 
-Generate a swagger document from your ktor application
+Generate a swagger document from your ktor application. See the 
+[sample project](https://github.com/sultanofcardio/openapi-ktor-sample)
 
-[Sample project](https://github.com/sultanofcardio/openapi-ktor-sample)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.5.20-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Ktor](https://img.shields.io/badge/ktor-1.5.3-orange.svg)](https://ktor.io/)
+[![Gradle](https://img.shields.io/badge/gradle-6.7-green.svg?logo=gradle)](http://kotlinlang.org)
+[![Java](https://img.shields.io/badge/java-1.8-red.svg?logo=java)](http://kotlinlang.org)
+[![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 ---
 
