@@ -42,7 +42,7 @@ Add the dependency to your pom.xml or build.gradle
 <dependency>
     <groupId>com.sultanofcardio</groupId>
     <artifactId>openapi-ktor</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 </dependencies>
 ```
@@ -57,7 +57,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.sultanofcardio:openapi-ktor:1.0.0'
+    implementation 'com.sultanofcardio:openapi-ktor:1.0.0-SNAPSHOT'
 }
 ```
 
