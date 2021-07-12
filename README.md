@@ -1,6 +1,6 @@
 # OpenAPI Ktor
 
-Generate a swagger document from your ktor application. See the 
+Generate an OpenAPI document from your ktor application. See the 
 [sample project](https://github.com/sultanofcardio/openapi-ktor-sample)
 
 [![OpenAPI](https://img.shields.io/badge/openapi-3.0.3-87bf40.svg?logo=swagger)](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md)
